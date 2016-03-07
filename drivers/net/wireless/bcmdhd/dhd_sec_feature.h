@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Header file describing the internal (inter-module) DHD interfaces.
  *
  * Provides type definitions and function prototypes used to link the
@@ -30,7 +30,8 @@
 /* PROJECTS */
 
 #if defined(CONFIG_MACH_SAMSUNG_ESPRESSO)\
-	|| defined(CONFIG_MACH_SAMSUNG_ESPRESSO_10)
+	|| defined(CONFIG_MACH_SAMSUNG_ESPRESSO_10)\
+	|| defined(CONFIG_MACH_SAMSUNG_ESPRESSO_CHN_CMCC)
 #undef USE_CID_CHECK
 #define READ_MACADDR
 #define HW_OOB
@@ -38,10 +39,20 @@
 
 /* Module */
 
-#if defined(CONFIG_MACH_U1) || defined(CONFIG_MACH_TRATS)
+#if defined(CONFIG_MACH_U1) || defined(CONFIG_MACH_TRATS)\
+	|| defined(CONFIG_MACH_SAMSUNG_PALAU)\
+	|| defined(CONFIG_MACH_SAMSUNG_SUPERIOR)\
+	|| defined(CONFIG_MACH_SAMSUNG_SUPERIOR_CHN_OPEN)\
+	|| defined(CONFIG_MACH_SAMSUNG_SUPERIOR_CHN_CMCC)
 #ifdef CONFIG_MACH_Q1_BD
 #define HW_OOB
 #endif
+#define USE_CID_CHECK
+#define WRITE_MACADDR
+#endif
+
+#ifdef CONFIG_MACH_SAMSUNG_T1
+#define HW_OOB
 #define USE_CID_CHECK
 #define WRITE_MACADDR
 #endif
@@ -51,11 +62,21 @@
 #define READ_MACADDR
 #endif
 
+#ifdef CONFIG_MACH_SAMSUNG_KONA
+#undef USE_CID_CHECK
+#define READ_MACADDR
+#endif
+
+#ifdef CONFIG_MACH_SAMSUNG_GOKEY
+#undef USE_CID_CHECK
+#define READ_MACADDR
+#endif
+
 /* REGION CODE */
 
 #if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
 #if (WLAN_REGION_CODE == 101) /*EUR ORG*/
-;/* GAN LITE NAT KEEPALIVE FILTER */
+/* GAN LITE NAT KEEPALIVE FILTER */
 #define GAN_LITE_NAT_KEEPALIVE_FILTER
 #endif
 #endif
